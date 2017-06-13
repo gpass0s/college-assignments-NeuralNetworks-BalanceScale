@@ -11,4 +11,4 @@ Attribute Information:
 4. Right-Weight: 5 (1, 2, 3, 4, 5) 
 5. Right-Distance: 5 (1, 2, 3, 4, 5)
 
- For more information about each of those functions click here: (http://www.ra.cs.uni-tuebingen.de/SNNS/UserManual/node52.html). 
+ For more information about each of those learning functions click here: (http://www.ra.cs.uni-tuebingen.de/SNNS/UserManual/node52.html). 
