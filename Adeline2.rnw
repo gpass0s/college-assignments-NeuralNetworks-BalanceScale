@@ -1,0 +1,88 @@
+\documentclass{article}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+EXERCICIO 6 (14/05/17)\\
+Disciplina: Redes Neurais Artificiais\\
+Professor: Antonio P. Braga\\
+Aluno: Guilherme Passos\\
+Matricula: 2011016244\\
+
+<<echo=T, fig=T>>=
+
+
+source("C:\\Users\\passsos\\Dropbox\\Public\\UFMG\\Redes Neurais\\Ex6_2017-1\\trainadeline.R")
+source("C:\\Users\\passsos\\Dropbox\\Public\\UFMG\\Redes Neurais\\Ex6_2017-1\\yAdaline.R")
+library('ggplot2')
+
+# -----------------------------------------------
+# Funcao que implementa um pecpetron simples
+
+  cat("\014")
+
+
+  #Abrindo amostras do arquivo
+  xEntrada <-as.matrix(read.table("C:\\Users\\passsos\\Dropbox\\Public\\UFMG\\Redes Neurais\\Ex6_2017-1\\Ex1_x"))
+  
+  
+ ySaida <-as.matrix(read.table("C:\\Users\\passsos\\Dropbox\\Public\\UFMG\\Redes Neurais\\Ex6_2017-1\\Ex1_y"))
+ 
+ tAmostragem <-as.matrix(read.table("C:\\Users\\passsos\\Dropbox\\Public\\UFMG\\Redes Neurais\\Ex6_2017-1\\Ex1_t"))
+ 
+ 
+ plot(tAmostragem, xEntrada, type='o', col='red', xlim=c(0.2,6.4), ylim=c(-1,1), xlab='Tempo', ylab='Sinais observados')
+  par(new=TRUE)
+  plot(tAmostragem, ySaida, type='o', col='blue', xlim=c(0.2,6.4), ylim=c(-1,1), xlab='', ylab='')
+ 
+  #Selecionando 70% dos dados de entrada para o treinamento
+  N <- dim(xEntrada)[1]
+  nTrain <- round(0.7 * N)
+  nTest <- N - nTrain
+ 
+  
+  # set the seed to make your partition reproductible
+  set.seed(1234)
+  randSeq <- sample(N)
+  trainSeq <- randSeq[1:nTrain]
+  testSeq <- randSeq[(nTrain+1):N]
+                     
+  #selecao das amostras da classe 01 para treinamento
+  train_x <- as.matrix(xEntrada[trainSeq, ])
+  #selecao das amostras restantes da classe 01 (30%) para os testes 
+  test_x <- as.matrix(xEntrada[testSeq, ])
+  
+  #selecao das amostras da classe 01 para treinamento
+  train_y <- as.matrix(ySaida[trainSeq, ])
+  #selecatrain_yo das amostras restantes da classe 01 (30%) para os testes 
+  test_y <- as.matrix(ySaida[testSeq, ])
+
+  #treinamento: geracao da matriz de pesos wTrain 
+  wTrain <- trainadaline(train_x,train_y,0.01,0.01,100,T)[[1]]
+  
+  #Coeficientes a e b do polinominio
+   wTrain
+
+  #Para checar se os valores obtidos para os coeficientes de y foram bem aproximados, calculamos os valores de y aproximados por w através da multiplicação matricial:
+  
+          #y = x.w
+ 
+  #Como as observações de x tem somente uma dimensão, uma coluna de -1 foi adicionada a ele. Também foi calculado o erro quadrático médio:
+  # Valores estimados e erro medio quadratico
+  yEstim <- yAdaline(xEntrad,wTrain,1)
+  errVec <- ySaida- yEstim
+  meanSqrErr <- as.double((t(errVec) %*% errVec) / nrow(xEntrada))
+  meanSqrErr
+  
+  #Por fim, temos um esboço dos valores de y observado (preto) e aproximado (verde).
+# Esboco do saida estimada e observada
+  plot(tAmostragem, yEstim, type='o', col='green', xlim=c(0.2,6.4), ylim=c(-1,1), xlab='Tempo',   ylab='Sinais de saída')
+  par(new=TRUE)
+  plot(tAmostragem, ySaida, type='o', col='black', xlim=c(0.2,6.4), ylim=c(-1,1), xlab='', ylab='')
+  
+  #--------
+  
+@
+
+\end{document}
+
