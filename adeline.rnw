@@ -63,20 +63,20 @@ library('ggplot2')
   #Coeficientes a e b do polinominio
    wTrain
 
-  #Para checar se os valores obtidos para os coeficientes de y foram bem aproximados, calculamos os valores de y aproximados por w atravÈs da multiplicaÁ„o matricial:
+  #Para checar se os valores obtidos para os coeficientes de y foram bem aproximados, calculamos os valores de y aproximados por w atrav√©s da multiplica√ß√£o matricial:
   
           #y = x.w
  
-  #Como as observaÁıes de x tem somente uma dimens„o, uma coluna de -1 foi adicionada a ele. TambÈm foi calculado o erro quadr·tico mÈdio:
+  #Como as observa√ß√µes de x tem somente uma dimens√£o, uma coluna de -1 foi adicionada a ele. Tamb√©m foi calculado o erro quadr√°tico m√©dio:
   # Valores estimados e erro medio quadratico
   yEstim <- yAdaline(xEntrad,wTrain,1)
   errVec <- ySaida- yEstim
   meanSqrErr <- as.double((t(errVec) %*% errVec) / nrow(xEntrada))
   meanSqrErr
   
-  #Por fim, temos um esboÁo dos valores de y observado (preto) e aproximado (verde).
+  #Por fim, temos um esbo√ßo dos valores de y observado (preto) e aproximado (verde).
 # Esboco do saida estimada e observada
-  plot(tAmostragem, yEstim, type='o', col='green', xlim=c(0.2,6.4), ylim=c(-1,1), xlab='Tempo',   ylab='Sinais de saÌda')
+  plot(tAmostragem, yEstim, type='o', col='green', xlim=c(0.2,6.4), ylim=c(-1,1), xlab='Tempo',   ylab='Sinais de sa√≠da')
   par(new=TRUE)
   plot(tAmostragem, ySaida, type='o', col='black', xlim=c(0.2,6.4), ylim=c(-1,1), xlab='', ylab='')
   
